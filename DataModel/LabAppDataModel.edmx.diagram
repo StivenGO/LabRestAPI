@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9cc75fb27c234b57bccbf160027cd850" Name="Diagram1">
+        <EntityTypeShape EntityType="LABASPRODENTModel.DetallesOrdens" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.EstadosOrdenes" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Facturas" Width="1.5" PointX="3" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Insumos" Width="1.5" PointX="5.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.InsumosCompras" Width="1.5" PointX="8" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.InsumosProcesos" Width="1.5" PointX="11" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Ordenes" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Procesos" Width="1.5" PointX="3.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.ProcesosProductos" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Productos" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.TiposClientes" Width="1.5" PointX="1.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.TiposOrdenes" Width="1.5" PointX="10.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.TransicionesOrdenes" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_DetallesOrdens_Ordenes" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_DetallesOrdens_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_TransicionesOrdenes_DetallesOrdens" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_Facturas_Ordenes" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_InsumosCompras_Insumos" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_InsumosProcesos_Insumos" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_InsumosProcesos_Procesos" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_ProcesosProductos_Procesos" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_ProcesosProductos_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_TransicionesOrdenes_ProcesosProductos" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Clientes" Width="1.5" PointX="3.75" PointY="23.5" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_Clientes_TipoCliente" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_Ordenes_Clientes" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Empleados" Width="1.5" PointX="0.75" PointY="13" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_TransicionesOrdenes_Empleados" />
+        <EntityTypeShape EntityType="LABASPRODENTModel.Proveedores" Width="1.5" PointX="13.375" PointY="1" />
+        <AssociationConnector Association="LABASPRODENTModel.FK_InsumosCompras_Proveedores" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

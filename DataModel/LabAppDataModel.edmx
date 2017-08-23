@@ -1,0 +1,1070 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LABASPRODENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="70" />
+          <Property Name="Direccion" Type="varchar" MaxLength="70" />
+          <Property Name="FkIdTipoCliente" Type="int" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinVigencia" Type="datetime" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="AcercaDe" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="DetallesOrdens">
+          <Key>
+            <PropertyRef Name="IdDetalleOrden" />
+          </Key>
+          <Property Name="IdDetalleOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkIdOrden" Type="int" />
+          <Property Name="FkIdProducto" Type="int" />
+          <Property Name="Prioridad" Type="varchar" MaxLength="50" />
+          <Property Name="FechaEstimadaEntrega" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="AcercaDe" Type="varchar" MaxLength="300" />
+          <Property Name="FechaInicioVigencia" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinVigencia" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EstadosOrdenes">
+          <Key>
+            <PropertyRef Name="IdEstadoOrden" />
+          </Key>
+          <Property Name="IdEstadoOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkIdOrden" Type="int" Nullable="false" />
+          <Property Name="FechaFactura" Type="datetime" Nullable="false" />
+          <Property Name="Abono" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ValorTotalFactura" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Insumos">
+          <Key>
+            <PropertyRef Name="IdInsumos" />
+          </Key>
+          <Property Name="IdInsumos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Insumo" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Unidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="datetime" Nullable="false" />
+          <Property Name="FechaCierreVigencia" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InsumosCompras">
+          <Key>
+            <PropertyRef Name="IdInsumosCompras" />
+          </Key>
+          <Property Name="IdInsumosCompras" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkIdInsumo" Type="int" Nullable="false" />
+          <Property Name="FkIdProveedor" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CostoUnidad" Type="int" Nullable="false" />
+          <Property Name="CostoTotal" Type="int" Nullable="false" />
+          <Property Name="FechaCompra" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinalInsumo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InsumosProcesos">
+          <Key>
+            <PropertyRef Name="IdInsumoProceso" />
+          </Key>
+          <Property Name="IdInsumoProceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkIdProceso" Type="int" Nullable="false" />
+          <Property Name="FkIdInsumo" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Unidad" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="IdOrden" />
+          </Key>
+          <Property Name="IdOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkIdCliente" Type="int" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="500" />
+          <Property Name="FechaOrden" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Procesos">
+          <Key>
+            <PropertyRef Name="IdProceso" />
+          </Key>
+          <Property Name="IdProceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Proceso" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="CostoManoObra" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProcesosProductos">
+          <Key>
+            <PropertyRef Name="IdProcesoProducto" />
+          </Key>
+          <Property Name="IdProcesoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkIdProceso" Type="int" Nullable="false" />
+          <Property Name="FkIdProducto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ValorBase" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="datetime" Nullable="false" />
+          <Property Name="FechaCierreVigencia" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="AcercaDe" Type="varchar" MaxLength="300" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinVigencia" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TiposClientes">
+          <Key>
+            <PropertyRef Name="IdTipoCliente" />
+          </Key>
+          <Property Name="IdTipoCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoCliente" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposOrdenes">
+          <Key>
+            <PropertyRef Name="IdTipoOrden" />
+          </Key>
+          <Property Name="IdTipoOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoOrden" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransicionesOrdenes">
+          <Key>
+            <PropertyRef Name="IdTransicion" />
+          </Key>
+          <Property Name="IdTransicion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkIdDetalleOrden" Type="int" Nullable="false" />
+          <Property Name="FkIProcesoProducto" Type="int" Nullable="false" />
+          <Property Name="FkIdEmpleadoAcargo" Type="int" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="150" />
+          <Property Name="FechaTransicion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Clientes_TipoCliente">
+          <End Role="TiposClientes" Type="Self.TiposClientes" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposClientes">
+              <PropertyRef Name="IdTipoCliente" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="FkIdTipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallesOrdens_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="DetallesOrdens" Type="Self.DetallesOrdens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="IdOrden" />
+            </Principal>
+            <Dependent Role="DetallesOrdens">
+              <PropertyRef Name="FkIdOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallesOrdens_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="DetallesOrdens" Type="Self.DetallesOrdens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DetallesOrdens">
+              <PropertyRef Name="FkIdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="IdOrden" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="FkIdOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsumosCompras_Insumos">
+          <End Role="Insumos" Type="Self.Insumos" Multiplicity="1" />
+          <End Role="InsumosCompras" Type="Self.InsumosCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insumos">
+              <PropertyRef Name="IdInsumos" />
+            </Principal>
+            <Dependent Role="InsumosCompras">
+              <PropertyRef Name="FkIdInsumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsumosCompras_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="InsumosCompras" Type="Self.InsumosCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="InsumosCompras">
+              <PropertyRef Name="FkIdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsumosProcesos_Insumos">
+          <End Role="Insumos" Type="Self.Insumos" Multiplicity="1" />
+          <End Role="InsumosProcesos" Type="Self.InsumosProcesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insumos">
+              <PropertyRef Name="IdInsumos" />
+            </Principal>
+            <Dependent Role="InsumosProcesos">
+              <PropertyRef Name="FkIdInsumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsumosProcesos_Procesos">
+          <End Role="Procesos" Type="Self.Procesos" Multiplicity="1" />
+          <End Role="InsumosProcesos" Type="Self.InsumosProcesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procesos">
+              <PropertyRef Name="IdProceso" />
+            </Principal>
+            <Dependent Role="InsumosProcesos">
+              <PropertyRef Name="FkIdProceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="IdOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcesosProductos_Procesos">
+          <End Role="Procesos" Type="Self.Procesos" Multiplicity="1" />
+          <End Role="ProcesosProductos" Type="Self.ProcesosProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procesos">
+              <PropertyRef Name="IdProceso" />
+            </Principal>
+            <Dependent Role="ProcesosProductos">
+              <PropertyRef Name="FkIdProceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcesosProductos_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ProcesosProductos" Type="Self.ProcesosProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="ProcesosProductos">
+              <PropertyRef Name="FkIdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransicionesOrdenes_DetallesOrdens">
+          <End Role="DetallesOrdens" Type="Self.DetallesOrdens" Multiplicity="1" />
+          <End Role="TransicionesOrdenes" Type="Self.TransicionesOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetallesOrdens">
+              <PropertyRef Name="IdDetalleOrden" />
+            </Principal>
+            <Dependent Role="TransicionesOrdenes">
+              <PropertyRef Name="FkIdDetalleOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransicionesOrdenes_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="TransicionesOrdenes" Type="Self.TransicionesOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="TransicionesOrdenes">
+              <PropertyRef Name="FkIdEmpleadoAcargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransicionesOrdenes_ProcesosProductos">
+          <End Role="ProcesosProductos" Type="Self.ProcesosProductos" Multiplicity="1" />
+          <End Role="TransicionesOrdenes" Type="Self.TransicionesOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcesosProductos">
+              <PropertyRef Name="IdProcesoProducto" />
+            </Principal>
+            <Dependent Role="TransicionesOrdenes">
+              <PropertyRef Name="FkIProcesoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LABASPRODENTModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetallesOrdens" EntityType="Self.DetallesOrdens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadosOrdenes" EntityType="Self.EstadosOrdenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Insumos" EntityType="Self.Insumos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsumosCompras" EntityType="Self.InsumosCompras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsumosProcesos" EntityType="Self.InsumosProcesos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Procesos" EntityType="Self.Procesos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcesosProductos" EntityType="Self.ProcesosProductos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposClientes" EntityType="Self.TiposClientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposOrdenes" EntityType="Self.TiposOrdenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransicionesOrdenes" EntityType="Self.TransicionesOrdenes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clientes_TipoCliente" Association="Self.FK_Clientes_TipoCliente">
+            <End Role="TiposClientes" EntitySet="TiposClientes" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallesOrdens_Ordenes" Association="Self.FK_DetallesOrdens_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="DetallesOrdens" EntitySet="DetallesOrdens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallesOrdens_Productos" Association="Self.FK_DetallesOrdens_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetallesOrdens" EntitySet="DetallesOrdens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Ordenes" Association="Self.FK_Facturas_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsumosCompras_Insumos" Association="Self.FK_InsumosCompras_Insumos">
+            <End Role="Insumos" EntitySet="Insumos" />
+            <End Role="InsumosCompras" EntitySet="InsumosCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsumosCompras_Proveedores" Association="Self.FK_InsumosCompras_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="InsumosCompras" EntitySet="InsumosCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsumosProcesos_Insumos" Association="Self.FK_InsumosProcesos_Insumos">
+            <End Role="Insumos" EntitySet="Insumos" />
+            <End Role="InsumosProcesos" EntitySet="InsumosProcesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsumosProcesos_Procesos" Association="Self.FK_InsumosProcesos_Procesos">
+            <End Role="Procesos" EntitySet="Procesos" />
+            <End Role="InsumosProcesos" EntitySet="InsumosProcesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Clientes" Association="Self.FK_Ordenes_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcesosProductos_Procesos" Association="Self.FK_ProcesosProductos_Procesos">
+            <End Role="Procesos" EntitySet="Procesos" />
+            <End Role="ProcesosProductos" EntitySet="ProcesosProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcesosProductos_Productos" Association="Self.FK_ProcesosProductos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProcesosProductos" EntitySet="ProcesosProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransicionesOrdenes_DetallesOrdens" Association="Self.FK_TransicionesOrdenes_DetallesOrdens">
+            <End Role="DetallesOrdens" EntitySet="DetallesOrdens" />
+            <End Role="TransicionesOrdenes" EntitySet="TransicionesOrdenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransicionesOrdenes_Empleados" Association="Self.FK_TransicionesOrdenes_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="TransicionesOrdenes" EntitySet="TransicionesOrdenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransicionesOrdenes_ProcesosProductos" Association="Self.FK_TransicionesOrdenes_ProcesosProductos">
+            <End Role="ProcesosProductos" EntitySet="ProcesosProductos" />
+            <End Role="TransicionesOrdenes" EntitySet="TransicionesOrdenes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LABASPRODENTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DetallesOrdens">
+          <Key>
+            <PropertyRef Name="IdDetalleOrden" />
+          </Key>
+          <Property Name="IdDetalleOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkIdOrden" Type="Int32" />
+          <Property Name="FkIdProducto" Type="Int32" />
+          <Property Name="Prioridad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEstimadaEntrega" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_DetallesOrdens_Ordenes" FromRole="DetallesOrdens" ToRole="Ordenes" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_DetallesOrdens_Productos" FromRole="DetallesOrdens" ToRole="Productos" />
+          <NavigationProperty Name="TransicionesOrdenes" Relationship="Self.FK_TransicionesOrdenes_DetallesOrdens" FromRole="DetallesOrdens" ToRole="TransicionesOrdenes" />
+        </EntityType>
+        <EntityType Name="EstadosOrdenes">
+          <Key>
+            <PropertyRef Name="IdEstadoOrden" />
+          </Key>
+          <Property Name="IdEstadoOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkIdOrden" Type="Int32" Nullable="false" />
+          <Property Name="FechaFactura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Abono" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ValorTotalFactura" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_Facturas_Ordenes" FromRole="Facturas" ToRole="Ordenes" />
+        </EntityType>
+        <EntityType Name="Insumos">
+          <Key>
+            <PropertyRef Name="IdInsumos" />
+          </Key>
+          <Property Name="IdInsumos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Insumo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Unidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCierreVigencia" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InsumosCompras" Relationship="Self.FK_InsumosCompras_Insumos" FromRole="Insumos" ToRole="InsumosCompras" />
+          <NavigationProperty Name="InsumosProcesos" Relationship="Self.FK_InsumosProcesos_Insumos" FromRole="Insumos" ToRole="InsumosProcesos" />
+        </EntityType>
+        <EntityType Name="InsumosCompras">
+          <Key>
+            <PropertyRef Name="IdInsumosCompras" />
+          </Key>
+          <Property Name="IdInsumosCompras" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkIdInsumo" Type="Int32" Nullable="false" />
+          <Property Name="FkIdProveedor" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CostoUnidad" Type="Int32" Nullable="false" />
+          <Property Name="CostoTotal" Type="Int32" Nullable="false" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinalInsumo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Insumos" Relationship="Self.FK_InsumosCompras_Insumos" FromRole="InsumosCompras" ToRole="Insumos" />
+          <NavigationProperty Name="Proveedores" Relationship="LABASPRODENTModel.FK_InsumosCompras_Proveedores" FromRole="InsumosCompras" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="InsumosProcesos">
+          <Key>
+            <PropertyRef Name="IdInsumoProceso" />
+          </Key>
+          <Property Name="IdInsumoProceso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkIdProceso" Type="Int32" Nullable="false" />
+          <Property Name="FkIdInsumo" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Unidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Insumos" Relationship="Self.FK_InsumosProcesos_Insumos" FromRole="InsumosProcesos" ToRole="Insumos" />
+          <NavigationProperty Name="Procesos" Relationship="Self.FK_InsumosProcesos_Procesos" FromRole="InsumosProcesos" ToRole="Procesos" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="IdOrden" />
+          </Key>
+          <Property Name="IdOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkIdCliente" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaOrden" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DetallesOrdens" Relationship="Self.FK_DetallesOrdens_Ordenes" FromRole="Ordenes" ToRole="DetallesOrdens" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Ordenes" FromRole="Ordenes" ToRole="Facturas" />
+          <NavigationProperty Name="Clientes" Relationship="LABASPRODENTModel.FK_Ordenes_Clientes" FromRole="Ordenes" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="Procesos">
+          <Key>
+            <PropertyRef Name="IdProceso" />
+          </Key>
+          <Property Name="IdProceso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Proceso" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CostoManoObra" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="InsumosProcesos" Relationship="Self.FK_InsumosProcesos_Procesos" FromRole="Procesos" ToRole="InsumosProcesos" />
+          <NavigationProperty Name="ProcesosProductos" Relationship="Self.FK_ProcesosProductos_Procesos" FromRole="Procesos" ToRole="ProcesosProductos" />
+        </EntityType>
+        <EntityType Name="ProcesosProductos">
+          <Key>
+            <PropertyRef Name="IdProcesoProducto" />
+          </Key>
+          <Property Name="IdProcesoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkIdProceso" Type="Int32" Nullable="false" />
+          <Property Name="FkIdProducto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Procesos" Relationship="Self.FK_ProcesosProductos_Procesos" FromRole="ProcesosProductos" ToRole="Procesos" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_ProcesosProductos_Productos" FromRole="ProcesosProductos" ToRole="Productos" />
+          <NavigationProperty Name="TransicionesOrdenes" Relationship="Self.FK_TransicionesOrdenes_ProcesosProductos" FromRole="ProcesosProductos" ToRole="TransicionesOrdenes" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ValorBase" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCierreVigencia" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DetallesOrdens" Relationship="Self.FK_DetallesOrdens_Productos" FromRole="Productos" ToRole="DetallesOrdens" />
+          <NavigationProperty Name="ProcesosProductos" Relationship="Self.FK_ProcesosProductos_Productos" FromRole="Productos" ToRole="ProcesosProductos" />
+        </EntityType>
+        <EntityType Name="TiposClientes">
+          <Key>
+            <PropertyRef Name="IdTipoCliente" />
+          </Key>
+          <Property Name="IdTipoCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="LABASPRODENTModel.FK_Clientes_TipoCliente" FromRole="TiposClientes" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="TiposOrdenes">
+          <Key>
+            <PropertyRef Name="IdTipoOrden" />
+          </Key>
+          <Property Name="IdTipoOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoOrden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransicionesOrdenes">
+          <Key>
+            <PropertyRef Name="IdTransicion" />
+          </Key>
+          <Property Name="IdTransicion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkIdDetalleOrden" Type="Int32" Nullable="false" />
+          <Property Name="FkIProcesoProducto" Type="Int32" Nullable="false" />
+          <Property Name="FkIdEmpleadoAcargo" Type="Int32" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransicion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DetallesOrdens" Relationship="Self.FK_TransicionesOrdenes_DetallesOrdens" FromRole="TransicionesOrdenes" ToRole="DetallesOrdens" />
+          <NavigationProperty Name="ProcesosProductos" Relationship="Self.FK_TransicionesOrdenes_ProcesosProductos" FromRole="TransicionesOrdenes" ToRole="ProcesosProductos" />
+          <NavigationProperty Name="Empleados" Relationship="LABASPRODENTModel.FK_TransicionesOrdenes_Empleados" FromRole="TransicionesOrdenes" ToRole="Empleados" />
+        </EntityType>
+        <Association Name="FK_DetallesOrdens_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="DetallesOrdens" Type="Self.DetallesOrdens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="IdOrden" />
+            </Principal>
+            <Dependent Role="DetallesOrdens">
+              <PropertyRef Name="FkIdOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallesOrdens_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="DetallesOrdens" Type="Self.DetallesOrdens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DetallesOrdens">
+              <PropertyRef Name="FkIdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransicionesOrdenes_DetallesOrdens">
+          <End Role="DetallesOrdens" Type="Self.DetallesOrdens" Multiplicity="1" />
+          <End Role="TransicionesOrdenes" Type="Self.TransicionesOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetallesOrdens">
+              <PropertyRef Name="IdDetalleOrden" />
+            </Principal>
+            <Dependent Role="TransicionesOrdenes">
+              <PropertyRef Name="FkIdDetalleOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="IdOrden" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="FkIdOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsumosCompras_Insumos">
+          <End Role="Insumos" Type="Self.Insumos" Multiplicity="1" />
+          <End Role="InsumosCompras" Type="Self.InsumosCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insumos">
+              <PropertyRef Name="IdInsumos" />
+            </Principal>
+            <Dependent Role="InsumosCompras">
+              <PropertyRef Name="FkIdInsumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsumosProcesos_Insumos">
+          <End Role="Insumos" Type="Self.Insumos" Multiplicity="1" />
+          <End Role="InsumosProcesos" Type="Self.InsumosProcesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insumos">
+              <PropertyRef Name="IdInsumos" />
+            </Principal>
+            <Dependent Role="InsumosProcesos">
+              <PropertyRef Name="FkIdInsumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsumosProcesos_Procesos">
+          <End Role="Procesos" Type="Self.Procesos" Multiplicity="1" />
+          <End Role="InsumosProcesos" Type="Self.InsumosProcesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procesos">
+              <PropertyRef Name="IdProceso" />
+            </Principal>
+            <Dependent Role="InsumosProcesos">
+              <PropertyRef Name="FkIdProceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcesosProductos_Procesos">
+          <End Role="Procesos" Type="Self.Procesos" Multiplicity="1" />
+          <End Role="ProcesosProductos" Type="Self.ProcesosProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procesos">
+              <PropertyRef Name="IdProceso" />
+            </Principal>
+            <Dependent Role="ProcesosProductos">
+              <PropertyRef Name="FkIdProceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcesosProductos_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ProcesosProductos" Type="Self.ProcesosProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="ProcesosProductos">
+              <PropertyRef Name="FkIdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransicionesOrdenes_ProcesosProductos">
+          <End Role="ProcesosProductos" Type="Self.ProcesosProductos" Multiplicity="1" />
+          <End Role="TransicionesOrdenes" Type="Self.TransicionesOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcesosProductos">
+              <PropertyRef Name="IdProcesoProducto" />
+            </Principal>
+            <Dependent Role="TransicionesOrdenes">
+              <PropertyRef Name="FkIProcesoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LABASPRODENTConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DetallesOrdens" EntityType="Self.DetallesOrdens" />
+          <EntitySet Name="EstadosOrdenes" EntityType="Self.EstadosOrdenes" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" />
+          <EntitySet Name="Insumos" EntityType="Self.Insumos" />
+          <EntitySet Name="InsumosCompras" EntityType="Self.InsumosCompras" />
+          <EntitySet Name="InsumosProcesos" EntityType="Self.InsumosProcesos" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" />
+          <EntitySet Name="Procesos" EntityType="Self.Procesos" />
+          <EntitySet Name="ProcesosProductos" EntityType="Self.ProcesosProductos" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="TiposClientes" EntityType="Self.TiposClientes" />
+          <EntitySet Name="TiposOrdenes" EntityType="Self.TiposOrdenes" />
+          <EntitySet Name="TransicionesOrdenes" EntityType="Self.TransicionesOrdenes" />
+          <AssociationSet Name="FK_DetallesOrdens_Ordenes" Association="Self.FK_DetallesOrdens_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="DetallesOrdens" EntitySet="DetallesOrdens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallesOrdens_Productos" Association="Self.FK_DetallesOrdens_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetallesOrdens" EntitySet="DetallesOrdens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransicionesOrdenes_DetallesOrdens" Association="Self.FK_TransicionesOrdenes_DetallesOrdens">
+            <End Role="DetallesOrdens" EntitySet="DetallesOrdens" />
+            <End Role="TransicionesOrdenes" EntitySet="TransicionesOrdenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Ordenes" Association="Self.FK_Facturas_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsumosCompras_Insumos" Association="Self.FK_InsumosCompras_Insumos">
+            <End Role="Insumos" EntitySet="Insumos" />
+            <End Role="InsumosCompras" EntitySet="InsumosCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsumosProcesos_Insumos" Association="Self.FK_InsumosProcesos_Insumos">
+            <End Role="Insumos" EntitySet="Insumos" />
+            <End Role="InsumosProcesos" EntitySet="InsumosProcesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsumosProcesos_Procesos" Association="Self.FK_InsumosProcesos_Procesos">
+            <End Role="Procesos" EntitySet="Procesos" />
+            <End Role="InsumosProcesos" EntitySet="InsumosProcesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcesosProductos_Procesos" Association="Self.FK_ProcesosProductos_Procesos">
+            <End Role="Procesos" EntitySet="Procesos" />
+            <End Role="ProcesosProductos" EntitySet="ProcesosProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcesosProductos_Productos" Association="Self.FK_ProcesosProductos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProcesosProductos" EntitySet="ProcesosProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransicionesOrdenes_ProcesosProductos" Association="Self.FK_TransicionesOrdenes_ProcesosProductos">
+            <End Role="ProcesosProductos" EntitySet="ProcesosProductos" />
+            <End Role="TransicionesOrdenes" EntitySet="TransicionesOrdenes" />
+          </AssociationSet>
+          <EntitySet Name="Clientes" EntityType="LABASPRODENTModel.Clientes" />
+          <AssociationSet Name="FK_Clientes_TipoCliente" Association="LABASPRODENTModel.FK_Clientes_TipoCliente">
+            <End Role="TiposClientes" EntitySet="TiposClientes" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Clientes" Association="LABASPRODENTModel.FK_Ordenes_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <EntitySet Name="Empleados" EntityType="LABASPRODENTModel.Empleados" />
+          <AssociationSet Name="FK_TransicionesOrdenes_Empleados" Association="LABASPRODENTModel.FK_TransicionesOrdenes_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="TransicionesOrdenes" EntitySet="TransicionesOrdenes" />
+          </AssociationSet>
+          <EntitySet Name="Proveedores" EntityType="LABASPRODENTModel.Proveedores" />
+          <AssociationSet Name="FK_InsumosCompras_Proveedores" Association="LABASPRODENTModel.FK_InsumosCompras_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="InsumosCompras" EntitySet="InsumosCompras" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="FkIdTipoCliente" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinVigencia" Type="DateTime" Precision="3" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="AcercaDe" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TiposClientes" Relationship="LABASPRODENTModel.FK_Clientes_TipoCliente" FromRole="Clientes" ToRole="TiposClientes" />
+          <NavigationProperty Name="Ordenes" Relationship="LABASPRODENTModel.FK_Ordenes_Clientes" FromRole="Clientes" ToRole="Ordenes" />
+        </EntityType>
+        <Association Name="FK_Clientes_TipoCliente">
+          <End Type="LABASPRODENTModel.TiposClientes" Role="TiposClientes" Multiplicity="1" />
+          <End Type="LABASPRODENTModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposClientes">
+              <PropertyRef Name="IdTipoCliente" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="FkIdTipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Clientes">
+          <End Type="LABASPRODENTModel.Clientes" Role="Clientes" Multiplicity="1" />
+          <End Type="LABASPRODENTModel.Ordenes" Role="Ordenes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="IdOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="AcercaDe" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicioVigencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinVigencia" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TransicionesOrdenes" Relationship="LABASPRODENTModel.FK_TransicionesOrdenes_Empleados" FromRole="Empleados" ToRole="TransicionesOrdenes" />
+        </EntityType>
+        <Association Name="FK_TransicionesOrdenes_Empleados">
+          <End Type="LABASPRODENTModel.Empleados" Role="Empleados" Multiplicity="1" />
+          <End Type="LABASPRODENTModel.TransicionesOrdenes" Role="TransicionesOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="TransicionesOrdenes">
+              <PropertyRef Name="FkIdEmpleadoAcargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Proveedor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AcercaDe" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="FechaInicioVigencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinVigencia" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InsumosCompras" Relationship="LABASPRODENTModel.FK_InsumosCompras_Proveedores" FromRole="Proveedores" ToRole="InsumosCompras" />
+        </EntityType>
+        <Association Name="FK_InsumosCompras_Proveedores">
+          <End Type="LABASPRODENTModel.Proveedores" Role="Proveedores" Multiplicity="1" />
+          <End Type="LABASPRODENTModel.InsumosCompras" Role="InsumosCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="InsumosCompras">
+              <PropertyRef Name="FkIdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LABASPRODENTModelStoreContainer" CdmEntityContainer="LABASPRODENTConnection">
+          <EntitySetMapping Name="DetallesOrdens">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.DetallesOrdens">
+              <MappingFragment StoreEntitySet="DetallesOrdens">
+                <ScalarProperty Name="IdDetalleOrden" ColumnName="IdDetalleOrden" />
+                <ScalarProperty Name="FkIdOrden" ColumnName="FkIdOrden" />
+                <ScalarProperty Name="FkIdProducto" ColumnName="FkIdProducto" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="FechaEstimadaEntrega" ColumnName="FechaEstimadaEntrega" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadosOrdenes">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.EstadosOrdenes">
+              <MappingFragment StoreEntitySet="EstadosOrdenes">
+                <ScalarProperty Name="IdEstadoOrden" ColumnName="IdEstadoOrden" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="FkIdOrden" ColumnName="FkIdOrden" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="Abono" ColumnName="Abono" />
+                <ScalarProperty Name="ValorTotalFactura" ColumnName="ValorTotalFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Insumos">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Insumos">
+              <MappingFragment StoreEntitySet="Insumos">
+                <ScalarProperty Name="IdInsumos" ColumnName="IdInsumos" />
+                <ScalarProperty Name="Insumo" ColumnName="Insumo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="FechaInicioVigencia" ColumnName="FechaInicioVigencia" />
+                <ScalarProperty Name="FechaCierreVigencia" ColumnName="FechaCierreVigencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsumosCompras">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.InsumosCompras">
+              <MappingFragment StoreEntitySet="InsumosCompras">
+                <ScalarProperty Name="IdInsumosCompras" ColumnName="IdInsumosCompras" />
+                <ScalarProperty Name="FkIdInsumo" ColumnName="FkIdInsumo" />
+                <ScalarProperty Name="FkIdProveedor" ColumnName="FkIdProveedor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="CostoUnidad" ColumnName="CostoUnidad" />
+                <ScalarProperty Name="CostoTotal" ColumnName="CostoTotal" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="FechaFinalInsumo" ColumnName="FechaFinalInsumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsumosProcesos">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.InsumosProcesos">
+              <MappingFragment StoreEntitySet="InsumosProcesos">
+                <ScalarProperty Name="IdInsumoProceso" ColumnName="IdInsumoProceso" />
+                <ScalarProperty Name="FkIdProceso" ColumnName="FkIdProceso" />
+                <ScalarProperty Name="FkIdInsumo" ColumnName="FkIdInsumo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordenes">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Ordenes">
+              <MappingFragment StoreEntitySet="Ordenes">
+                <ScalarProperty Name="IdOrden" ColumnName="IdOrden" />
+                <ScalarProperty Name="FkIdCliente" ColumnName="FkIdCliente" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="FechaOrden" ColumnName="FechaOrden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Procesos">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Procesos">
+              <MappingFragment StoreEntitySet="Procesos">
+                <ScalarProperty Name="IdProceso" ColumnName="IdProceso" />
+                <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CostoManoObra" ColumnName="CostoManoObra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcesosProductos">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.ProcesosProductos">
+              <MappingFragment StoreEntitySet="ProcesosProductos">
+                <ScalarProperty Name="IdProcesoProducto" ColumnName="IdProcesoProducto" />
+                <ScalarProperty Name="FkIdProceso" ColumnName="FkIdProceso" />
+                <ScalarProperty Name="FkIdProducto" ColumnName="FkIdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ValorBase" ColumnName="ValorBase" />
+                <ScalarProperty Name="FechaInicioVigencia" ColumnName="FechaInicioVigencia" />
+                <ScalarProperty Name="FechaCierreVigencia" ColumnName="FechaCierreVigencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposClientes">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.TiposClientes">
+              <MappingFragment StoreEntitySet="TiposClientes">
+                <ScalarProperty Name="IdTipoCliente" ColumnName="IdTipoCliente" />
+                <ScalarProperty Name="TipoCliente" ColumnName="TipoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposOrdenes">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.TiposOrdenes">
+              <MappingFragment StoreEntitySet="TiposOrdenes">
+                <ScalarProperty Name="IdTipoOrden" ColumnName="IdTipoOrden" />
+                <ScalarProperty Name="TipoOrden" ColumnName="TipoOrden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransicionesOrdenes">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.TransicionesOrdenes">
+              <MappingFragment StoreEntitySet="TransicionesOrdenes">
+                <ScalarProperty Name="IdTransicion" ColumnName="IdTransicion" />
+                <ScalarProperty Name="FkIdDetalleOrden" ColumnName="FkIdDetalleOrden" />
+                <ScalarProperty Name="FkIProcesoProducto" ColumnName="FkIProcesoProducto" />
+                <ScalarProperty Name="FkIdEmpleadoAcargo" ColumnName="FkIdEmpleadoAcargo" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="FechaTransicion" ColumnName="FechaTransicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="AcercaDe" ColumnName="AcercaDe" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaFinVigencia" ColumnName="FechaFinVigencia" />
+                <ScalarProperty Name="FechaInicioVigencia" ColumnName="FechaInicioVigencia" />
+                <ScalarProperty Name="FkIdTipoCliente" ColumnName="FkIdTipoCliente" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="FechaFinVigencia" ColumnName="FechaFinVigencia" />
+                <ScalarProperty Name="FechaInicioVigencia" ColumnName="FechaInicioVigencia" />
+                <ScalarProperty Name="AcercaDe" ColumnName="AcercaDe" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="LABASPRODENTModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="FechaFinVigencia" ColumnName="FechaFinVigencia" />
+                <ScalarProperty Name="FechaInicioVigencia" ColumnName="FechaInicioVigencia" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="AcercaDe" ColumnName="AcercaDe" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
